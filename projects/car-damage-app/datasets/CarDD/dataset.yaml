@@ -1,0 +1,15 @@
+# CarDD Dataset Configuration
+path: C:\Users\ZhuanZ\.openclaw\workspace\projects\car-damage-app\datasets\CarDD
+train: images/train
+val: images/val
+test: images/test
+
+# Classes
+nc: 6
+names:
+  0: dent          # 凹陷
+  1: scratch       # 划痕
+  2: crack         # 裂纹
+  3: paint_loss    # 掉漆
+  4: perforation   # 穿孔
+  5: deformation   # 变形

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "skills": {
+    "self-improving-agent": {
+      "version": "3.0.10",
+      "installedAt": 1774705382780
+    },
+    "ai-video-script": {
+      "version": "1.0.0",
+      "installedAt": 1774705801613
+    },
+    "hitem3d": {
+      "version": "0.2.2",
+      "installedAt": 1774953183870
+    },
+    "bambu-studio-ai": {
+      "version": "1.0.1",
+      "installedAt": 1774954086817
+    },
+    "vin": {
+      "version": "1.0.3",
+      "installedAt": 1775105463284
+    },
+    "epc": {
+      "version": "1.0.1",
+      "installedAt": 1775113264578
+    },
+    "parts": {
+      "version": "1.0.3",
+      "installedAt": 1775113322082
+    }
+  }
+}

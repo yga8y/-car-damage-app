@@ -1,0 +1,36 @@
+{
+  "title": "#警惕把学校变成“无菌”的存在",
+  "topic": "警惕把学校变成“无菌”的存在",
+  "style": "口播",
+  "duration": 30,
+  "scenes": [
+    {
+      "scene_num": 1,
+      "time": "0-10秒",
+      "visual": "引人注目的开场画面，展示「警惕把学校变成“无菌”的存在」主题",
+      "prompt": "Eye-catching opening scene about 警惕把学校变成“无菌”的存在, dynamic composition, vibrant colors, cinematic lighting --ar 9:16",
+      "voiceover": "你知道吗？最近警惕把学校变成“无菌”的存在火了！",
+      "subtitle": "🔥 警惕把学校变成“无菌”的存在",
+      "music": "节奏感强的开场音乐"
+    },
+    {
+      "scene_num": 2,
+      "time": "10-20秒",
+      "visual": "展示警惕把学校变成“无菌”的存在相关内容，信息可视化",
+      "prompt": "Information visualization about 警惕把学校变成“无菌”的存在, clean design, animated graphics, modern style --ar 9:16",
+      "voiceover": "让我们来看看这背后的故事...",
+      "subtitle": "第2点",
+      "music": "轻快的背景音乐"
+    },
+    {
+      "scene_num": 3,
+      "time": "20-30秒",
+      "visual": "互动引导画面，关注点赞",
+      "prompt": "Social media engagement scene, thumbs up and follow icons, vibrant background, call to action --ar 9:16",
+      "voiceover": "你怎么看？评论区告诉我！记得点赞关注~",
+      "subtitle": "👍 点赞 | ➕ 关注 | 💬 评论",
+      "music": "结尾高潮音乐"
+    }
+  ],
+  "full_voiceover": "你知道吗？最近警惕把学校变成“无菌”的存在火了！ 让我们来看看这背后的故事... 你怎么看？评论区告诉我！记得点赞关注~"
+}

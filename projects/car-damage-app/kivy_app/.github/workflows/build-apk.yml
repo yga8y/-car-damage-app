@@ -1,0 +1,98 @@
+name: Build Kivy APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          python3-pip \
+          build-essential \
+          git \
+          ffmpeg \
+          libsdl2-dev \
+          libsdl2-image-dev \
+          libsdl2-mixer-dev \
+          libsdl2-ttf-dev \
+          libportmidi-dev \
+          libswscale-dev \
+          libavformat-dev \
+          libavcodec-dev \
+          zlib1g-dev \
+          libgstreamer1.0 \
+          gstreamer1.0-plugins-base \
+          gstreamer1.0-plugins-good
+        
+        pip install --upgrade pip
+        pip install buildozer cython
+    
+    - name: Build APK
+      run: |
+        buildozer android debug
+      working-directory: .
+      continue-on-error: true
+    
+    - name: Check build output
+      run: |
+        ls -la bin/ || echo "No bin directory"
+        find . -name "*.apk" -type f 2>/dev/null || echo "No APK found"
+    
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: car-damage-app-apk
+        path: |
+          bin/*.apk
+          **/*.apk
+        retention-days: 30
+    
+    - name: Create Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "bin/*.apk"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: v1.0.${{ github.run_number }}
+        name: 车辆定损AI v1.0.${{ github.run_number }}
+        body: |
+          ## 车辆定损AI APP
+          
+          智能车辆定损评估系统
+          
+          ### 功能特性
+          - 📸 智能定损评估
+          - 💰 配件价格查询（带OE编号）
+          - 📋 自动生成报价单
+          - 🔧 离线使用
+          
+          ### 支持车型
+          - 丰田、大众、本田、别克、日产
+          - 比亚迪、特斯拉、宝马、奔驰、奥迪
+          
+          ### 支持事故类型
+          - 追尾、侧撞、正面碰撞、剐蹭
+          
+          ### 安装方法
+          1. 下载APK文件
+          2. 允许安装未知来源应用
+          3. 点击安装
+          
+          构建时间: ${{ github.event.head_commit.timestamp }}
+        allowUpdates: true

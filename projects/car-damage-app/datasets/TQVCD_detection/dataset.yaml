@@ -1,0 +1,9 @@
+names:
+- breakage
+- crushed
+- normal
+nc: 3
+path: C:\Users\ZhuanZ\.openclaw\workspace\projects\car-damage-app\datasets\TQVCD_detection
+test: images/test
+train: images/train
+val: images/val

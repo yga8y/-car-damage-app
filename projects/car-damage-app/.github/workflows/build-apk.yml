@@ -1,0 +1,66 @@
+name: Build Flutter APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+    
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.9'
+        channel: 'stable'
+    
+    - name: Check Flutter version
+      run: flutter doctor -v
+      working-directory: ./frontend
+    
+    - name: Get dependencies
+      run: flutter pub get
+      working-directory: ./frontend
+    
+    - name: Build APK
+      run: flutter build apk --release
+      working-directory: ./frontend
+    
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: car-damage-app-apk
+        path: frontend/build/app/outputs/flutter-apk/app-release.apk
+        retention-days: 30
+    
+    - name: Upload to Release
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "frontend/build/app/outputs/flutter-apk/app-release.apk"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: v1.0.${{ github.run_number }}
+        name: Release v1.0.${{ github.run_number }}
+        body: |
+          车辆定损AI APP - 自动构建版本
+          
+          功能特性：
+          - AI视觉识别车损
+          - 自动定损评估
+          - 配件价格查询
+          - 只换不修规则
+          
+          构建时间: ${{ github.event.head_commit.timestamp }}
